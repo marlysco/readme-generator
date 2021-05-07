@@ -10,9 +10,9 @@ const intro = "Welcome to the Professional Readme Generator, because no one can 
 const questions = 
 ["What is your project tittle?:",
  "Enter a brief description of you application (always include the objective of it): ",
- "How can the user access to your app?: ",
- "Enter a brief description of the usage of this project",
- "Please enter a link with a demo of your app: ",
+ "How users can get started with the app?: ",
+ "Enter a brief description of the usage of this project: ",
+ "Please enter a link with a video demo of your app: ",
  "Are you open to collaboration?: ",
  "Select from the choices listed below the licence of your project",
  "Please enter your email",
@@ -51,28 +51,26 @@ function init() {
 
     },
     {
-        type:"list",
+        type:'list',
         name:"collaboration",
         message:questions[5],
         choices:['Yes', 'No'],
     },
     {
-        type:"input",
+        type:'checkbox',
         name:"licenses",
         message:questions[6],
-        choises:['ISC','CC','MIT','GNU','None'],
+        choices:['ISC','CC','MIT','GNU','None'],
     },
     {
         type:'input',
         name:'email',
-        message:questions[7]
-
+        message:questions[7],
     },
     {
         type:'input',
         name:'gitHub',
         message:questions[8]
-
     }
 
 ]).then(answers=>{
@@ -84,18 +82,27 @@ function init() {
        collaborationAgreed="No collaboratios allowed"
        console.log(collaborationAgreed)
     }   
- console.log(answers.title,answers.description, answers.run, answers.usage, answers.demo, collaborationAgreed, answers.licenses.choises, answers.email, answers.gitHub);
+ console.log(answers.title,answers.description, answers.run, answers.usage, answers.demo, collaborationAgreed, answers.licenses, answers.email, answers.gitHub);
     
     const readMe=`
- #${answers.tittle}
+ ## ${answers.tittle}
+
 
  ## Description:
- ${answers.tittle}
+ ${answers.description}
 
- ## How to access to the app?:
+ ## Table of Contents
+- [Installation](#Installation)
+- [Usage](#Usage) 
+- [Contributing](#Contributing)
+- [Licenses](#Licenses)
+- [Demo](#Demo)
+- [Questions](#Questions)
+
+ ## Installation
  ${answers.run}
 
- ## How to use it?:
+ ## Usage
  ${answers.usage}
 
  ## Demo
@@ -104,10 +111,10 @@ function init() {
  ## Contributing
  ${collaborationAgreed}
 
- ## Licenses:
- ${answers.licenses}
+ ## Licenses
+ ![licenses](https://img.shields.io/badge/License-${answers.licenses}-green.svg "License Badge")
 
- ## Do you have any questions? comments?
+ ## Questions
  Please contact me:
  ${answers.email} | ${answers.gitHub}
  `
